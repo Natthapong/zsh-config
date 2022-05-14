@@ -115,10 +115,10 @@ fi
 
 RUNNING2=`sudo /etc/init.d/xrdp status | grep "xrdp is not running" | awk '{$1=$1};1'`
 if [[ ${RUNNING2} = "* xrdp is not running" ]]; then
-    sudo sudo /etc/init.d/xrdp start > /dev/null 2>&1
+    sudo /etc/init.d/xrdp start > /dev/null 2>&1
 fi
 
 RUNNING3=`sudo /etc/init.d/dbus status | grep "dbus is not running" | awk '{$1=$1};1'`
 if [[ ${RUNNING3} = "* dbus is not running" ]]; then
-    sudo sudo /etc/init.d/dbus start > /dev/null 2>&1
+    sudo /etc/init.d/dbus start > /dev/null 2>&1
 fi
