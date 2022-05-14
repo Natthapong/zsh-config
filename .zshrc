@@ -104,10 +104,21 @@ alias k="kubectl --insecure-skip-tls-verify=true"
 export LD_LIBRARY_PATH=/home/natthapong_ch/wsl-download/instantclient_21_6
 export PATH=$PATH:$LD_LIBRARY_PATH:/usr/local/go/bin 
 export KUBECONFIG=/home/natthapong_ch/.kube/kubeconfig-apps.uat
+export DONT_PROMPT_WSL_INSTALL=1
 
 #Start Docker daemon automatically when logging in if not running.
 RUNNING=`ps aux | grep dockerd | grep -v grep`
 if [ -z "$RUNNING" ]; then
     sudo dockerd > /dev/null 2>&1 &
     disown
+fi
+
+RUNNING2=`sudo /etc/init.d/xrdp status | grep "xrdp is not running" | awk '{$1=$1};1'`
+if [[ ${RUNNING2} = "* xrdp is not running" ]]; then
+    sudo sudo /etc/init.d/xrdp start > /dev/null 2>&1
+fi
+
+RUNNING3=`sudo /etc/init.d/dbus status | grep "dbus is not running" | awk '{$1=$1};1'`
+if [[ ${RUNNING3} = "* dbus is not running" ]]; then
+    sudo sudo /etc/init.d/dbus start > /dev/null 2>&1
 fi
